@@ -5,6 +5,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Componet/Pages/Home/Home.jsx";
 import AvailableFoods from "./Componet/Pages/AvailableFoods/AvailableFoods.jsx";
+import Login from "./Componet/Pages/Login/Login.jsx";
+import Signup from "./Componet/Pages/Signup/Signup.jsx";
+import DetailsPage from "./Componet/Pages/DetailsPage/DetailsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,22 @@ const router = createBrowserRouter([
       {
         path: "/AvailableFoods",
         element: <AvailableFoods></AvailableFoods>,
+      },
+      {
+        path: "/addfood",
+        element: <AvailableFoods></AvailableFoods>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <Signup></Signup>,
+      },
+      {
+        path: "/details/:id",
+        element: <DetailsPage></DetailsPage>,
       },
     ],
   },

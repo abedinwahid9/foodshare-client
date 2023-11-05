@@ -5,11 +5,11 @@ import Header from "./Componet/Header/Header";
 
 function App() {
   return (
-    <div className="fonts">
-      <div className="container mx-auto">
-        <Header></Header>
-        <Outlet />
-      </div>
+    <div className="fonts container mx-auto">
+      <Header></Header>
+
+      <Outlet />
+
       {/* <FooterSection></FooterSection> */}
     </div>
   );

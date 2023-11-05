@@ -1,9 +1,13 @@
+import FeaturedFoods from "../../FeaturedFoods/FeaturedFoods";
+import SpecialSection from "../../SpecialSection/SpecialSection";
 import Banner from "./Banner/Banner";
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       <Banner></Banner>
+      <SpecialSection></SpecialSection>
+      <FeaturedFoods></FeaturedFoods>
     </div>
   );
 };
