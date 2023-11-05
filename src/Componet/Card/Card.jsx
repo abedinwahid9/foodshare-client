@@ -29,6 +29,10 @@ const Card = () => {
         <p className="font-bold">
           Pickup Location: <span className="font-normal">dhaka</span>
         </p>
+        <p className="font-bold">
+          Additional Notes:{" "}
+          <span className="font-normal">Lorem ipsum dolor sit amet.</span>
+        </p>
         <div className="card-actions">
           <Link
             to="/details/:id"
