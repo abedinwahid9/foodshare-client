@@ -1,3 +1,7 @@
 .active {
   color: #ffc107;
 }
+
+.fonts {
+  font-family: "Roboto Condensed", sans-serif;
+}

@@ -5,9 +5,9 @@ import Header from "./Componet/Header/Header";
 
 function App() {
   return (
-    <div>
-      <Header></Header>
+    <div className="fonts">
       <div className="container mx-auto">
+        <Header></Header>
         <Outlet />
       </div>
       {/* <FooterSection></FooterSection> */}

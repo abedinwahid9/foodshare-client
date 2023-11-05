@@ -3,29 +3,29 @@ import { NavLink } from "react-router-dom";
 function NavbarSite() {
   const links = (
     <>
-      <NavLink className="mr-2 text-base font-medium" to="/">
+      <NavLink className="mr-3 text-lg font-bold" to="/">
         Home
       </NavLink>
-      <NavLink className="mr-2 text-base font-medium" to="/AvailableFoods">
+      <NavLink className="mr-3 text-lg font-bold" to="/AvailableFoods">
         AvailableFoods
       </NavLink>
-      <NavLink className="mr-2 text-base font-medium" to="/Add">
-        add
+      <NavLink className="mr-3 text-lg font-bold" to="/Addfood">
+        Add Food
       </NavLink>
-      <NavLink className="mr-2 text-base font-medium" to="/">
-        AvailableFoods
+      <NavLink className="mr-3 text-lg font-bold" to="/myfoodrequest">
+        My Food Request
       </NavLink>
-      <NavLink className="mr-2 text-base font-medium" to="/">
-        contact us
+      <NavLink className="mr-3 text-lg font-bold" to="/login">
+        Login
       </NavLink>
     </>
   );
 
   return (
     <div>
-      <div className="navbar md:p-3 bg-firstColor drop-shadow-lg">
+      <div className="navbar  md:p-3 bg-firstColor drop-shadow-lg z-50 relative">
         <div className="navbar-start">
-          <div className="dropdown">
+          <div className="dropdown z-10">
             <label tabIndex={0} className="btn btn-ghost lg:hidden mr-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
