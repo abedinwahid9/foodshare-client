@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "foodName": "Fresh Organic Vegetables",
+    "donatorImage": "https://example.com/images/user1.jpg",
+    "donatorName": "GreenThumbCommunity",
+    "foodQuantity": "5 lbs",
+    "pickupLocation": "123 Main Street, Cityville",
+    "expiredDateTime": "2023-01-15 14:00:00",
+    "additionalNotes": "Certified organic and pesticide-free veggies."
+  },
+  {
+    "id": 2,
+    "foodName": "Homemade Bread and Pastries",
+    "donatorImage": "https://example.com/images/user2.jpg",
+    "donatorName": "BakeryDelights",
+    "foodQuantity": "10 items",
+    "pickupLocation": "456 Elm Street, Townsville",
+    "expiredDateTime": "2023-01-18 12:30:00",
+    "additionalNotes": "Freshly baked pastries and bread."
+  },
+  {
+    "id": 3,
+    "foodName": "Canned Soups and Stews",
+    "donatorImage": "https://example.com/images/user3.jpg",
+    "donatorName": "CommunityPantry",
+    "foodQuantity": "15 cans",
+    "pickupLocation": "789 Oak Avenue, Villagetown",
+    "expiredDateTime": "2023-01-20 16:45:00",
+    "additionalNotes": "Variety of canned soups and stews."
+  },
+  {
+    "id": 3,
+    "foodName": "Canned Soups and Stews",
+    "donatorImage": "https://example.com/images/user3.jpg",
+    "donatorName": "CommunityPantry",
+    "foodQuantity": "15 cans",
+    "pickupLocation": "789 Oak Avenue, Villagetown",
+    "expiredDateTime": "2023-01-20 16:45:00",
+    "additionalNotes": "Variety of canned soups and stews."
+  },
+  {
+    "id": 3,
+    "foodName": "Canned Soups and Stews",
+    "donatorImage": "https://example.com/images/user3.jpg",
+    "donatorName": "CommunityPantry",
+    "foodQuantity": "15 cans",
+    "pickupLocation": "789 Oak Avenue, Villagetown",
+    "expiredDateTime": "2023-01-20 16:45:00",
+    "additionalNotes": "Variety of canned soups and stews."
+  }
+]
