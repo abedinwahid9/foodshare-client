@@ -4,13 +4,13 @@ const Login = () => {
   return (
     <div>
       <div
-        className="hero min-h-screen "
+        className="hero min-h-screen bg-no-repeat bg-center"
         style={{
           backgroundImage:
             "url(https://i.ibb.co/FKBztrz/pngtree-vegetables-green-food-poster-banner-picture-image-918033-removebg-preview.png)",
         }}
       >
-        <div className="w-2/4">
+        <div className="md:w-2/4 w-full">
           <div className="card  shadow-2xl bg-[#ffffff1f] p-5">
             <h2 className="text-center text-5xl font-extrabold">Login</h2>
             <form className="card-body">

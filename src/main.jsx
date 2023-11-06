@@ -9,6 +9,7 @@ import Login from "./Componet/Pages/Login/Login.jsx";
 import Signup from "./Componet/Pages/Signup/Signup.jsx";
 import DetailsPage from "./Componet/Pages/DetailsPage/DetailsPage.jsx";
 import AddFood from "./Componet/Pages/AddFood/AddFood.jsx";
+import ManageMyfoods from "./Componet/Pages/ManageMyfoods/ManageMyfoods.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/addfood",
         element: <AddFood></AddFood>,
+      },
+      {
+        path: "/managemyfoods",
+        element: <ManageMyfoods></ManageMyfoods>,
       },
       {
         path: "/login",

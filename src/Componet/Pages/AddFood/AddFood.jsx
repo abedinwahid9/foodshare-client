@@ -17,8 +17,8 @@ const AddFood = () => {
       {" "}
       <h2 className="text-5xl text-center font-extrabold">Add Sharing Food</h2>
       <div className="divider w-3/4 mx-auto"></div>
-      <div className="hero min-h-screen ">
-        <div className="hero-content ">
+      <div className="flex justify-center min-h-screen ">
+        <div className="md:w-3/5 w-full">
           <div className="card  shadow-2xl bg-[#ffffff50]">
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
@@ -138,8 +138,9 @@ const AddFood = () => {
                   render={({ field }) => (
                     <textarea
                       type="text"
+                      rows="3"
                       placeholder="Additional Notes:"
-                      className="input input-bordered pt-3 h-24"
+                      className="textarea textarea-bordered"
                       required
                       {...field}
                     />
@@ -153,7 +154,7 @@ const AddFood = () => {
                 <input
                   type="submit"
                   value="Add Product"
-                  className="btn btn-primary"
+                  className="btn bg-thirdColor text-secondColor text-lg"
                 />
               </div>
             </form>

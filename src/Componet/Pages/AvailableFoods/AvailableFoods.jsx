@@ -38,7 +38,7 @@ const AvailableFoods = () => {
           </select>
         </div>
       </div>
-      <div className="my-10">
+      <div className="py-10">
         <h2 className="text-center text-5xl font-extrabold">Avaiable Foods</h2>
         <div className="divider w-3/4 mx-auto"></div>
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-5">

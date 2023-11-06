@@ -6,11 +6,14 @@ function NavbarSite() {
       <NavLink className="mr-3 text-lg font-bold" to="/">
         Home
       </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/AvailableFoods">
+      <NavLink className="mr-3 text-lg font-bold" to="/availableFoods">
         AvailableFoods
       </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/Addfood">
+      <NavLink className="mr-3 text-lg font-bold" to="/addfood">
         Add Food
+      </NavLink>
+      <NavLink className="mr-3 text-lg font-bold" to="/managemyfoods">
+        Manage My Foods
       </NavLink>
       <NavLink className="mr-3 text-lg font-bold" to="/myfoodrequest">
         My Food Request
