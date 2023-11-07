@@ -1,10 +1,29 @@
+import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
   const { control, handleSubmit } = useForm();
 
+  const donarInfo = {
+    email: "admin@gmail.com",
+    name: "admin",
+    imgUrl: "url",
+  };
+  const Accessibility = true;
+
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    axios
+      .post("http://localhost:5000/addfood", {
+        ...data,
+        donarInfo,
+        Accessibility,
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire("cars add success ");
+        }
+      });
   };
   return (
     <div

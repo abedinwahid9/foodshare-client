@@ -13,11 +13,13 @@ import ManageMyfoods from "./Componet/Pages/ManageMyfoods/ManageMyfoods.jsx";
 import UpdateFood from "./Componet/Pages/UpdateFood/UpdateFood.jsx";
 import ManageFood from "./Componet/Pages/ManageFood/ManageFood.jsx";
 import MyreqFood from "./Componet/Pages/MyreqFood/MyreqFood.jsx";
+import Error from "./Componet/Pages/Error/Error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",

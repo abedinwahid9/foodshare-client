@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
 import Card from "../../Card/Card";
+import axios from "axios";
 
 const AvailableFoods = () => {
+  const [foodDatas, setFoodDatas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get("http://localhost:5000/foods").then((data) => {
+      setFoodDatas(data.data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <div
       className=" bg-no-repeat bg-contain bg-cover"
@@ -28,27 +41,25 @@ const AvailableFoods = () => {
           <h2 className="text-base font-bold mb-2">sort by expired date</h2>
           <select className="select select-warning w-full max-w-xs">
             <option disabled selected>
-              Pick a pizza
+              expired date
             </option>
-            <option>Cheese</option>
-            <option>Veggie</option>
-            <option>Pepperoni</option>
-            <option>Margherita</option>
-            <option>Hawaiian</option>
+            <option>Short date to Long date</option>
+            <option>Long date to Short date</option>
           </select>
         </div>
       </div>
       <div className="py-10">
         <h2 className="text-center text-5xl font-extrabold">Avaiable Foods</h2>
         <div className="divider w-3/4 mx-auto"></div>
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-5">
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-        </div>
+        {loading ? (
+          <span className="loading loading-spinner loading-lg"></span>
+        ) : (
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-5">
+            {foodDatas.map((foodDatas) => {
+              return <Card key={foodDatas._id} foodDatas={foodDatas}></Card>;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

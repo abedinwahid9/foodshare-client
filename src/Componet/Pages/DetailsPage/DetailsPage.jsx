@@ -1,4 +1,49 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 const DetailsPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [foodData, setFoodData] = useState({});
+  const id = useParams();
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/foods/details/${id.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(true);
+        setFoodData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  const {
+    _id,
+    Pickuplocation,
+    foodName,
+    Foodimageurl,
+    donarInfo,
+    FoodQuantity,
+    ExpiredDate,
+    AdditionalNotes,
+  } = foodData;
+
+  console.log(foodData);
+
+  const date = () => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = dd + "-" + mm + "-" + yyyy;
+
+    return today;
+  };
+
+  if (loading) {
+    return <span className="loading loading-spinner loading-lg"></span>;
+  }
+
   return (
     <div
       className="py-10 bg-no-repeat bg-contain bg-cover"
@@ -16,36 +61,32 @@ const DetailsPage = () => {
             src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
             alt=""
           />
-          <p className="text-2xl font-extrabold ">donar name</p>
+          <p className="text-2xl font-extrabold ">
+            donar name: {donarInfo.name}
+          </p>
         </div>
         <p className="font-bold text-3xl">
-          Pickup Location: <span className="font-normal">dhaka</span>
+          Pickup Location: <span className="font-normal">{Pickuplocation}</span>
         </p>
       </div>
       <div className="card bg-transparent">
         <figure className="px-10 pt-10">
-          <img
-            src="https://i.ibb.co/GQMxDTd/1-fe-MTb-NGk-DO37-R9c1k-LHMTA.webp"
-            alt="Shoes"
-            className="rounded-xl"
-          />
+          <img src={Foodimageurl} alt="Shoes" className="rounded-xl" />
         </figure>
         <div className="card-body md:px-20 py-10">
-          <h2 className="font-extrabold text-6xl">food name</h2>
+          <h2 className="font-extrabold text-6xl">{foodName}</h2>
 
           <p className="font-bold text-xl">
-            Food Quantity: <span className="font-normal">5pcs</span>
+            Food Quantity: <span className="font-normal">{FoodQuantity}</span>
           </p>
           <p className="font-bold text-xl">
-            Expired Date/Time: <span className="font-normal">2days</span>
+            Expired Date/Time:{" "}
+            <span className="font-normal">{ExpiredDate}</span>
           </p>
 
           <p className="font-bold text-xl">
             Additional Notes:{" "}
-            <span className="font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Consectetur, nihil!
-            </span>
+            <span className="font-normal">{AdditionalNotes}</span>
           </p>
           <div className="card-actions">
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -66,14 +107,14 @@ const DetailsPage = () => {
                 <div className="card  ">
                   <figure className="px-10 pt-10">
                     <img
-                      src="https://i.ibb.co/L5q9TMz/28061-removebg-preview.png"
+                      src={Foodimageurl}
                       alt="Shoes"
                       className="rounded-xl"
                     />
                   </figure>
                   <div className="card-body ">
-                    <h2 className="card-title">food name</h2>
-                    <h2 className="card-title">food id</h2>
+                    <h2 className="card-title">Food Name: {foodName}</h2>
+                    <h2 className="card-title">id: {_id}</h2>
                     <div className="flex  items-center gap-3">
                       <img
                         className="w-10 h-10 rounded-full"
@@ -81,23 +122,26 @@ const DetailsPage = () => {
                         alt=""
                       />
                       <div>
-                        <p className="text-lg font-extrabold">donar name </p>
-                        <p className="text-lg ">donar email </p>
+                        <p className="text-lg font-extrabold">
+                          {donarInfo.name}{" "}
+                        </p>
+                        <p className="text-lg ">{donarInfo.email}</p>
                       </div>
                     </div>
-                    <p className="text-lg font-extrabold">User name: </p>
-                    <p className="font-bold">Request Date: </p>
+                    <p className="text-lg font-extrabold">User name: login </p>
+                    <p className="font-bold">Request Date: {date()}</p>
 
                     <p className="font-bold">
-                      Food Quantity: <span className="font-normal">5pcs</span>
+                      Food Quantity:{" "}
+                      <span className="font-normal">{FoodQuantity}</span>
                     </p>
                     <p className="font-bold">
                       Expired Date/Time:{" "}
-                      <span className="font-normal">2days</span>
+                      <span className="font-normal">{ExpiredDate}</span>
                     </p>
                     <p className="font-bold">
                       Pickup Location:{" "}
-                      <span className="font-normal">dhaka</span>
+                      <span className="font-normal">{Pickuplocation}</span>
                     </p>
                     <p className="font-bold">
                       <p> Additional Notes:</p>
