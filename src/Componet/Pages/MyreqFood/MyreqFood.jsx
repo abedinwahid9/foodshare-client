@@ -6,11 +6,8 @@ import {
   flexRender,
   getCoreRowModel,
 } from "@tanstack/react-table";
-import { Link } from "react-router-dom";
-import { MdManageHistory, MdEditNote } from "react-icons/md";
-import { RxCross1 } from "react-icons/rx";
 
-const ManageMyfoods = () => {
+const MyreqFood = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -21,33 +18,27 @@ const ManageMyfoods = () => {
       accessorKey: "id",
     },
     {
-      header: "Image",
-      accessorKey: "foodName",
-      cell: () => (
-        <div className="avatar">
-          <div className="mask mask-squircle w-12 h-12">
-            <img
-              src="https://i.ibb.co/L5q9TMz/28061-removebg-preview.png"
-              alt="Avatar Tailwind CSS Component"
-            />
-          </div>
-        </div>
-      ),
-    },
-    {
-      header: "Food Name",
+      header: "Donar Name",
       accessorKey: "foodName",
     },
     {
-      header: "Quantity",
+      header: "Pickup Location",
+      accessorKey: "foodName",
+    },
+    {
+      header: "Expire Date",
       accessorKey: "donatorName",
     },
     {
-      header: "Expired Date/Time",
+      header: "Request Date",
       accessorKey: "pickupLocation",
     },
     {
-      header: "Status",
+      header: "Your Donation Amount",
+      accessorKey: "pickupLocation",
+    },
+    {
+      header: "Status (available/delivered)",
       accessorKey: "pickupLocation",
     },
     {
@@ -55,25 +46,11 @@ const ManageMyfoods = () => {
       accessorKey: "actions",
       cell: ({ row }) => (
         <div className="space-x-2">
-          <Link
-            to="/manage/:id"
-            className="btn bg-thirdColor text-secondColor text-2xl"
-            onClick={() => handleManage(row.original)}
-          >
-            <MdManageHistory />
-          </Link>
-          <Link
-            to="/update/:id"
-            className="btn bg-thirdColor text-secondColor text-2xl"
-            onClick={() => handleEdit(row.original.id)}
-          >
-            <MdEditNote />
-          </Link>
           <button
-            className="btn bg-thirdColor text-secondColor text-2xl"
+            className="btn bg-thirdColor text-secondColor "
             onClick={() => handleRemove(row.original.id)}
           >
-            <RxCross1 />
+            Cancel Request
           </button>
         </div>
       ),
@@ -121,7 +98,7 @@ const ManageMyfoods = () => {
 
   return (
     <div className="py-10 px-5">
-      <h3 className="text-center font-extrabold text-5xl">My Food</h3>
+      <h3 className="text-center font-extrabold text-5xl">My Request Food</h3>
       <div className="divider"></div>
       <table className="table text-center table-zebra">
         <thead>
@@ -151,4 +128,4 @@ const ManageMyfoods = () => {
   );
 };
 
-export default ManageMyfoods;
+export default MyreqFood;

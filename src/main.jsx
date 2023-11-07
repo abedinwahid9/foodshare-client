@@ -10,6 +10,9 @@ import Signup from "./Componet/Pages/Signup/Signup.jsx";
 import DetailsPage from "./Componet/Pages/DetailsPage/DetailsPage.jsx";
 import AddFood from "./Componet/Pages/AddFood/AddFood.jsx";
 import ManageMyfoods from "./Componet/Pages/ManageMyfoods/ManageMyfoods.jsx";
+import UpdateFood from "./Componet/Pages/UpdateFood/UpdateFood.jsx";
+import ManageFood from "./Componet/Pages/ManageFood/ManageFood.jsx";
+import MyreqFood from "./Componet/Pages/MyreqFood/MyreqFood.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +36,10 @@ const router = createBrowserRouter([
         element: <ManageMyfoods></ManageMyfoods>,
       },
       {
+        path: "/myreqfood",
+        element: <MyreqFood></MyreqFood>,
+      },
+      {
         path: "/login",
         element: <Login></Login>,
       },
@@ -43,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <DetailsPage></DetailsPage>,
+      },
+      {
+        path: "/manage/:id",
+        element: <ManageFood></ManageFood>,
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateFood></UpdateFood>,
       },
     ],
   },

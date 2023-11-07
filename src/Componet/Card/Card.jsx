@@ -35,10 +35,10 @@ const Card = () => {
         </p>
         <div className="card-actions">
           <Link
+            className="btn bg-thirdColor text-secondColor w-full"
             to="/details/:id"
-            className="btn bg-thirdColor text-secondColor "
           >
-            View Detail Button
+            View Details
           </Link>
         </div>
       </div>
