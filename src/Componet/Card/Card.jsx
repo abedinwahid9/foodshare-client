@@ -13,8 +13,6 @@ const Card = ({ foodDatas }) => {
     AdditionalNotes,
   } = foodDatas;
 
-  console.log(foodDatas);
-
   return (
     <div className="card bg-base-100 shadow-xl">
       <figure className="px-10 pt-10 h-2/5">

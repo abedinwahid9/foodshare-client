@@ -14,6 +14,9 @@ import UpdateFood from "./Componet/Pages/UpdateFood/UpdateFood.jsx";
 import ManageFood from "./Componet/Pages/ManageFood/ManageFood.jsx";
 import MyreqFood from "./Componet/Pages/MyreqFood/MyreqFood.jsx";
 import Error from "./Componet/Pages/Error/Error.jsx";
+import AuthContext from "./AuthContext/AuthContext.jsx";
+import PrivateRoute from "./Componet/PrivateRoute/PrivateRoute.jsx";
+import LoginRoute from "./Componet/PrivateRoute/LoginRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,35 +34,67 @@ const router = createBrowserRouter([
       },
       {
         path: "/addfood",
-        element: <AddFood></AddFood>,
+        element: (
+          <PrivateRoute>
+            <AddFood></AddFood>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/managemyfoods",
-        element: <ManageMyfoods></ManageMyfoods>,
+        element: (
+          <PrivateRoute>
+            <ManageMyfoods></ManageMyfoods>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myreqfood",
-        element: <MyreqFood></MyreqFood>,
+        element: (
+          <PrivateRoute>
+            <MyreqFood></MyreqFood>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: (
+          <LoginRoute>
+            <Login></Login>
+          </LoginRoute>
+        ),
       },
       {
         path: "/signup",
-        element: <Signup></Signup>,
+        element: (
+          <LoginRoute>
+            <Signup></Signup>
+          </LoginRoute>
+        ),
       },
       {
         path: "/details/:id",
-        element: <DetailsPage></DetailsPage>,
+        element: (
+          <PrivateRoute>
+            <DetailsPage></DetailsPage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/manage/:id",
-        element: <ManageFood></ManageFood>,
+        element: (
+          <PrivateRoute>
+            <ManageFood></ManageFood>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update/:id",
-        element: <UpdateFood></UpdateFood>,
+        element: (
+          <PrivateRoute>
+            <UpdateFood></UpdateFood>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -67,6 +102,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContext>
+      <RouterProvider router={router} />
+    </AuthContext>
   </React.StrictMode>
 );

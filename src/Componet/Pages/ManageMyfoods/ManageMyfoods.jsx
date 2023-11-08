@@ -66,7 +66,7 @@ const ManageMyfoods = () => {
           <Link
             to="/update/:id"
             className="btn bg-thirdColor text-secondColor text-2xl"
-            onClick={() => handleEdit(row.original.id)}
+            onClick={() => handleEdit(row.original._id)}
           >
             <MdEditNote />
           </Link>
@@ -87,10 +87,10 @@ const ManageMyfoods = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const email = "wahid@gmail.com";
+  const email = "admin@gmail.com";
 
   useEffect(() => {
-    axios(`http://localhost:5000/foods/${email}`)
+    axios(`http://localhost:5000/reqfood/${email}`)
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);
@@ -139,8 +139,8 @@ const ManageMyfoods = () => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+          {table.getRowModel().rows.map((row, i) => (
+            <tr key={i}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell._id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

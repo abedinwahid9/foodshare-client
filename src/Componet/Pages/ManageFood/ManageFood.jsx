@@ -1,4 +1,32 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 const ManageFood = () => {
+  const [addDatas, setaddDatas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  console.log(addDatas);
+
+  const email = "admin@gmail.com";
+  const id = useParams();
+
+  useEffect(() => {
+    axios(`http://localhost:5000/reqfood?email=${email}&sort=${id.id}`)
+      .then((response) => {
+        setLoading(true);
+        setaddDatas(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  if (loading) {
+    return <>loading.....</>;
+  }
+
   return (
     <div
       className="py-10 bg-no-repeat bg-contain bg-cover"
@@ -30,45 +58,31 @@ const ManageFood = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* row 1 */}
-                <tr>
-                  <th>
-                    {" "}
-                    <img
-                      className="w-12 h-12 my-4 rounded-full"
-                      src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
-                      alt=""
-                    />
-                  </th>
-                  <td>Req name</td>
-                  <td>Quality Control Specialist</td>
-                  <td>1-55-663</td>
-                  <td>
-                    <select className="select select-bordered w-3/4 max-w-xs">
-                      <option>Delivery</option>
-                      <option>Pending</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    {" "}
-                    <img
-                      className="w-12 h-12 my-4 rounded-full"
-                      src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
-                      alt=""
-                    />
-                  </th>
-                  <td>Req name</td>
-                  <td>Quality Control Specialist</td>
-                  <td>12245</td>
-                  <td>
-                    <select className="select select-bordered w-3/4 max-w-xs">
-                      <option>Delivery</option>
-                      <option>Pending</option>
-                    </select>
-                  </td>
-                </tr>
+                {addDatas.map((addData) => {
+                  return (
+                    <tr key={addData._id}>
+                      <th>
+                        <img
+                          className="w-12 h-12 my-4 rounded-full"
+                          src={addData.Foodimageurl}
+                          alt=""
+                        />
+                      </th>
+                      <td>{addData.donarName}</td>
+                      <td>{addData.email}</td>
+                      <td>{addData.reqDate}</td>
+                      <td>
+                        <select
+                          value={addData.Accessibility}
+                          className="select select-bordered w-3/4 max-w-xs"
+                        >
+                          <option>Delivery</option>
+                          <option>Pending</option>
+                        </select>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

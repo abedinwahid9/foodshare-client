@@ -1,6 +1,17 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthProvider } from "../../AuthContext/AuthContext";
 
 function NavbarSite() {
+  const { user, signOutUser } = useContext(AuthProvider);
+  console.log(user);
+
+  const handleLogout = () => {
+    signOutUser()
+      .then((result) => console.log("logout", result))
+      .catch((err) => console.error(err));
+  };
+
   const links = (
     <>
       <NavLink className="mr-3 text-lg font-bold" to="/">
@@ -9,18 +20,24 @@ function NavbarSite() {
       <NavLink className="mr-3 text-lg font-bold" to="/availableFoods">
         AvailableFoods
       </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/addfood">
-        Add Food
-      </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/managemyfoods">
-        Manage My Foods
-      </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/MyreqFood">
-        My Food Request
-      </NavLink>
-      <NavLink className="mr-3 text-lg font-bold" to="/login">
-        Login
-      </NavLink>
+      {user && (
+        <>
+          <NavLink className="mr-3 text-lg font-bold" to="/addfood">
+            Add Food
+          </NavLink>
+          <NavLink className="mr-3 text-lg font-bold" to="/managemyfoods">
+            Manage My Foods
+          </NavLink>
+          <NavLink className="mr-3 text-lg font-bold" to="/MyreqFood">
+            My Food Request
+          </NavLink>
+        </>
+      )}
+      {!user && (
+        <NavLink className="mr-3 text-lg font-bold" to="/login">
+          Login
+        </NavLink>
+      )}
     </>
   );
 
@@ -69,30 +86,27 @@ function NavbarSite() {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+          {user && (
+            <div className="ml-4 dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img src={user.photoURL} />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">{user.displayName}</a>
+                </li>
+
+                <li>
+                  <a onClick={handleLogout}>Logout</a>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
