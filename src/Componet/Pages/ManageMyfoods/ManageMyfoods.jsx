@@ -22,12 +22,13 @@ const ManageMyfoods = () => {
     },
     {
       header: "Image",
-      accessorKey: "foodName",
-      cell: () => (
+      accessorKey: "Foodimageurl",
+
+      cell: (tableProps) => (
         <div className="avatar">
           <div className="mask mask-squircle w-12 h-12">
             <img
-              src="https://i.ibb.co/L5q9TMz/28061-removebg-preview.png"
+              src={tableProps.row.original.Foodimageurl}
               alt="Avatar Tailwind CSS Component"
             />
           </div>
@@ -40,15 +41,15 @@ const ManageMyfoods = () => {
     },
     {
       header: "Quantity",
-      accessorKey: "donatorName",
+      accessorKey: "FoodQuantity",
     },
     {
       header: "Expired Date/Time",
-      accessorKey: "pickupLocation",
+      accessorKey: "ExpiredDate",
     },
     {
       header: "Status",
-      accessorKey: "pickupLocation",
+      accessorKey: "Accessibility",
     },
     {
       header: "Actions",
@@ -56,7 +57,7 @@ const ManageMyfoods = () => {
       cell: ({ row }) => (
         <div className="space-x-2">
           <Link
-            to="/manage/:id"
+            to={`/manage/${row.original.id}`}
             className="btn bg-thirdColor text-secondColor text-2xl"
             onClick={() => handleManage(row.original)}
           >
@@ -86,8 +87,10 @@ const ManageMyfoods = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const email = "wahid@gmail.com";
+
   useEffect(() => {
-    axios("/data.json")
+    axios(`http://localhost:5000/foods/${email}`)
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);
@@ -125,10 +128,10 @@ const ManageMyfoods = () => {
       <div className="divider"></div>
       <table className="table text-center table-zebra">
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+          {table.getHeaderGroups().map((headerGroup, i) => (
+            <tr key={i}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th key={header._id}>
                   {flexRender(header.column.columnDef.header)}
                 </th>
               ))}
@@ -139,7 +142,7 @@ const ManageMyfoods = () => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell._id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

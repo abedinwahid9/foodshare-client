@@ -24,7 +24,7 @@ const FeaturedFoods = () => {
           <span className="loading loading-spinner loading-lg"></span>
         ) : (
           <div className="grid lg:grid-cols-3  md:grid-cols-2 grid-cols-1 gap-3 my-5">
-            {foodDatas.map((foodDatas) => {
+            {foodDatas.slice(0, 6).map((foodDatas) => {
               return <Card key={foodDatas._id} foodDatas={foodDatas}></Card>;
             })}
           </div>

@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DetailsPage = () => {
   const [loading, setLoading] = useState(true);
@@ -21,13 +23,13 @@ const DetailsPage = () => {
     Pickuplocation,
     foodName,
     Foodimageurl,
-    donarInfo,
+    donarName,
+    email,
     FoodQuantity,
     ExpiredDate,
     AdditionalNotes,
+    Accessibility,
   } = foodData;
-
-  console.log(foodData);
 
   const date = () => {
     let today = new Date();
@@ -38,6 +40,41 @@ const DetailsPage = () => {
     today = dd + "-" + mm + "-" + yyyy;
 
     return today;
+  };
+
+  const handleReqForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const notes = form.notes.value;
+    const donationAmount = form.donationAmount.value;
+
+    const requestDetails = {
+      id: _id,
+      foodName: foodName,
+      donarName,
+      reqDate: date(),
+      FoodQuantity,
+      ExpiredDate,
+      email,
+      Pickuplocation,
+      Foodimageurl,
+      AdditionalNotes,
+      notes,
+      donationAmount,
+      Accessibility,
+    };
+
+    console.log(requestDetails);
+
+    axios
+      .post("http://localhost:5000/reqfood", {
+        ...requestDetails,
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire("request success ");
+        }
+      });
   };
 
   if (loading) {
@@ -61,9 +98,7 @@ const DetailsPage = () => {
             src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
             alt=""
           />
-          <p className="text-2xl font-extrabold ">
-            donar name: {donarInfo.name}
-          </p>
+          <p className="text-2xl font-extrabold ">donar name: {donarName}</p>
         </div>
         <p className="font-bold text-3xl">
           Pickup Location: <span className="font-normal">{Pickuplocation}</span>
@@ -102,75 +137,81 @@ const DetailsPage = () => {
                   {/* if there is a button in form, it will close the modal */}
                   <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                     ✕
-                  </button>
+                  </button>{" "}
                 </form>
-                <div className="card  ">
-                  <figure className="px-10 pt-10">
-                    <img
-                      src={Foodimageurl}
-                      alt="Shoes"
-                      className="rounded-xl"
-                    />
-                  </figure>
-                  <div className="card-body ">
-                    <h2 className="card-title">Food Name: {foodName}</h2>
-                    <h2 className="card-title">id: {_id}</h2>
-                    <div className="flex  items-center gap-3">
+                <form onSubmit={handleReqForm}>
+                  <div className="card  ">
+                    <figure className="px-10 pt-10">
                       <img
-                        className="w-10 h-10 rounded-full"
-                        src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
-                        alt=""
+                        src={Foodimageurl}
+                        alt="Shoes"
+                        className="rounded-xl"
                       />
+                    </figure>
+                    <div className="card-body ">
+                      <h2 className="card-title">Food Name: {foodName}</h2>
+                      <h2 className="card-title">id: {_id}</h2>
+                      <div className="flex  items-center gap-3">
+                        <img
+                          className="w-10 h-10 rounded-full"
+                          src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
+                          alt=""
+                        />
+                        <div>
+                          <p className="text-lg font-extrabold">{donarName} </p>
+                          <p className="text-lg ">{email}</p>
+                        </div>
+                      </div>
+                      <p className="text-lg font-extrabold">
+                        User name: login{" "}
+                      </p>
+                      <p className="font-bold">Request Date: {date()}</p>
+
+                      <p className="font-bold">
+                        Food Quantity:{" "}
+                        <span className="font-normal">{FoodQuantity}</span>
+                      </p>
+                      <p className="font-bold">
+                        Expired Date/Time:{" "}
+                        <span className="font-normal">{ExpiredDate}</span>
+                      </p>
+                      <p className="font-bold">
+                        Pickup Location:{" "}
+                        <span className="font-normal">{Pickuplocation}</span>
+                      </p>
+                      <p className="font-bold">
+                        <p> Additional Notes:</p>
+                        <textarea
+                          name="notes"
+                          required
+                          className="textarea textarea-warning"
+                          placeholder="Notes"
+                        ></textarea>
+                      </p>
                       <div>
-                        <p className="text-lg font-extrabold">
-                          {donarInfo.name}{" "}
-                        </p>
-                        <p className="text-lg ">{donarInfo.email}</p>
+                        <label>Donation Money:</label>
+                        <input
+                          name="donationAmount"
+                          type="number"
+                          required
+                          // value="0"
+                          placeholder="0"
+                          className="input input-bordered w-28 input-warning ml-3"
+                        />
+                      </div>
+                      <div className="card-actions">
+                        <input
+                          type="submit"
+                          value="Confirm Request"
+                          className="btn bg-thirdColor text-secondColor"
+                          onClick={() =>
+                            document.getElementById("my_modal_3").showModal()
+                          }
+                        />
                       </div>
                     </div>
-                    <p className="text-lg font-extrabold">User name: login </p>
-                    <p className="font-bold">Request Date: {date()}</p>
-
-                    <p className="font-bold">
-                      Food Quantity:{" "}
-                      <span className="font-normal">{FoodQuantity}</span>
-                    </p>
-                    <p className="font-bold">
-                      Expired Date/Time:{" "}
-                      <span className="font-normal">{ExpiredDate}</span>
-                    </p>
-                    <p className="font-bold">
-                      Pickup Location:{" "}
-                      <span className="font-normal">{Pickuplocation}</span>
-                    </p>
-                    <p className="font-bold">
-                      <p> Additional Notes:</p>
-                      <textarea
-                        className="textarea textarea-warning"
-                        placeholder="Notes"
-                      ></textarea>
-                    </p>
-                    <div>
-                      <label>Donation Money:</label>
-                      <input
-                        type="number"
-                        // value="0"
-                        placeholder="0"
-                        className="input input-bordered w-28 input-warning ml-3"
-                      />
-                    </div>
-                    <div className="card-actions">
-                      <button
-                        className="btn bg-thirdColor text-secondColor"
-                        onClick={() =>
-                          document.getElementById("my_modal_3").showModal()
-                        }
-                      >
-                        Confirm Request
-                      </button>
-                    </div>
                   </div>
-                </div>
+                </form>
               </div>
             </dialog>
           </div>

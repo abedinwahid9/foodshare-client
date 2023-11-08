@@ -6,12 +6,14 @@ const Card = ({ foodDatas }) => {
     _id,
     Foodimageurl,
     foodName,
-    donarInfo,
+    donarName,
     FoodQuantity,
     ExpiredDate,
     Pickuplocation,
     AdditionalNotes,
   } = foodDatas;
+
+  console.log(foodDatas);
 
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -26,7 +28,7 @@ const Card = ({ foodDatas }) => {
             src="https://i.ibb.co/s5pnwB5/download-1-removebg-preview.png"
             alt=""
           />
-          <p className="text-lg font-extrabold"> {donarInfo.name}</p>
+          <p className="text-lg font-extrabold"> {donarName}</p>
         </div>
         <p className="font-bold">
           Food Quantity: <span className="font-normal">{FoodQuantity} pcs</span>

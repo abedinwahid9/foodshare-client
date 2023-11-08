@@ -6,8 +6,7 @@ const AddFood = () => {
   const { control, handleSubmit } = useForm();
 
   const donarInfo = {
-    email: "admin@gmail.com",
-    name: "admin",
+    donarName: "admin",
     imgUrl: "url",
   };
   const Accessibility = true;
@@ -16,12 +15,13 @@ const AddFood = () => {
     axios
       .post("http://localhost:5000/addfood", {
         ...data,
-        donarInfo,
+        email: "wahid@gmail.com",
+        ...donarInfo,
         Accessibility,
       })
       .then((res) => {
         if (res.data.acknowledged) {
-          Swal.fire("cars add success ");
+          Swal.fire("Food add success ");
         }
       });
   };
