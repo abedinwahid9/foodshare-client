@@ -55,9 +55,15 @@ const AvailableFoods = () => {
           <span className="loading loading-spinner loading-lg"></span>
         ) : (
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-5">
-            {foodDatas.map((foodDatas) => {
-              return <Card key={foodDatas._id} foodDatas={foodDatas}></Card>;
-            })}
+            {foodDatas.length === 0 ? (
+              <h2 className="text-center text-lg font-extrabold">
+                No data found
+              </h2>
+            ) : (
+              foodDatas.map((foodDatas) => {
+                return <Card key={foodDatas._id} foodDatas={foodDatas}></Card>;
+              })
+            )}
           </div>
         )}
       </div>

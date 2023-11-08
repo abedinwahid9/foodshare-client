@@ -1,13 +1,16 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Swal from "sweetalert2";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const AddFood = () => {
   const { control, handleSubmit } = useForm();
+  const { user } = useContext(AuthProvider);
 
   const donarInfo = {
-    donarName: "admin",
-    imgUrl: "url",
+    donarName: user.displayName,
+    imgUrl: user.photoURL,
   };
   const Accessibility = true;
 
@@ -15,7 +18,7 @@ const AddFood = () => {
     axios
       .post("http://localhost:5000/addfood", {
         ...data,
-        email: "wahid@gmail.com",
+        email: user.email,
         ...donarInfo,
         Accessibility,
       })

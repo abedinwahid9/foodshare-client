@@ -1,14 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const ManageFood = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthProvider);
 
-  console.log(addDatas);
-
-  const email = "admin@gmail.com";
+  const email = user.email;
   const id = useParams();
 
   useEffect(() => {
@@ -58,31 +58,37 @@ const ManageFood = () => {
                 </tr>
               </thead>
               <tbody>
-                {addDatas.map((addData) => {
-                  return (
-                    <tr key={addData._id}>
-                      <th>
-                        <img
-                          className="w-12 h-12 my-4 rounded-full"
-                          src={addData.Foodimageurl}
-                          alt=""
-                        />
-                      </th>
-                      <td>{addData.donarName}</td>
-                      <td>{addData.email}</td>
-                      <td>{addData.reqDate}</td>
-                      <td>
-                        <select
-                          value={addData.Accessibility}
-                          className="select select-bordered w-3/4 max-w-xs"
-                        >
-                          <option>Delivery</option>
-                          <option>Pending</option>
-                        </select>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {addDatas.length === 0 ? (
+                  <h2 className="text-center text-lg font-extrabold">
+                    No data found
+                  </h2>
+                ) : (
+                  addDatas.map((addData) => {
+                    return (
+                      <tr key={addData._id}>
+                        <th>
+                          <img
+                            className="w-12 h-12 my-4 rounded-full"
+                            src={addData.Foodimageurl}
+                            alt=""
+                          />
+                        </th>
+                        <td>{addData.donarName}</td>
+                        <td>{addData.donarEmail}</td>
+                        <td>{addData.reqDate}</td>
+                        <td>
+                          <select
+                            value={addData.Accessibility}
+                            className="select select-bordered w-3/4 max-w-xs"
+                          >
+                            <option>Delivery</option>
+                            <option>Pending</option>
+                          </select>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>

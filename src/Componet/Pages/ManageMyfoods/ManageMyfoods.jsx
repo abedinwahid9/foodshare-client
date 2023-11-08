@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   useReactTable,
   flexRender,
@@ -9,16 +9,18 @@ import {
 import { Link } from "react-router-dom";
 import { MdManageHistory, MdEditNote } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const ManageMyfoods = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { user } = useContext(AuthProvider);
 
   const columns = [
     {
       header: "Id",
-      accessorKey: "id",
+      accessorKey: "_id",
     },
     {
       header: "Image",
@@ -57,7 +59,7 @@ const ManageMyfoods = () => {
       cell: ({ row }) => (
         <div className="space-x-2">
           <Link
-            to={`/manage/${row.original.id}`}
+            to={`/manage/${row.original._id}`}
             className="btn bg-thirdColor text-secondColor text-2xl"
             onClick={() => handleManage(row.original)}
           >
@@ -72,7 +74,7 @@ const ManageMyfoods = () => {
           </Link>
           <button
             className="btn bg-thirdColor text-secondColor text-2xl"
-            onClick={() => handleRemove(row.original.id)}
+            onClick={() => handleRemove(row.original._id)}
           >
             <RxCross1 />
           </button>
@@ -87,10 +89,9 @@ const ManageMyfoods = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const email = "admin@gmail.com";
-
+  const email = user.email;
   useEffect(() => {
-    axios(`http://localhost:5000/reqfood/${email}`)
+    axios(`http://localhost:5000/foods/${email}`)
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);

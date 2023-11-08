@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const DetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [foodData, setFoodData] = useState({});
   const id = useParams();
+  const { user } = useContext(AuthProvider);
 
   useEffect(() => {
     fetch(`http://localhost:5000/foods/details/${id.id}`)
@@ -47,6 +49,7 @@ const DetailsPage = () => {
     const form = e.target;
     const notes = form.notes.value;
     const donationAmount = form.donationAmount.value;
+    const donarEmail = user.email;
 
     const requestDetails = {
       id: _id,
@@ -56,6 +59,7 @@ const DetailsPage = () => {
       FoodQuantity,
       ExpiredDate,
       email,
+      donarEmail,
       Pickuplocation,
       Foodimageurl,
       AdditionalNotes,
@@ -63,8 +67,6 @@ const DetailsPage = () => {
       donationAmount,
       Accessibility,
     };
-
-    console.log(requestDetails);
 
     axios
       .post("http://localhost:5000/reqfood", {
