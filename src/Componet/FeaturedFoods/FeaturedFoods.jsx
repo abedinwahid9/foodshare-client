@@ -9,7 +9,7 @@ const FeaturedFoods = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/foods").then((data) => {
+    axios.get("https://food-community-sever.vercel.app/foods").then((data) => {
       setFoodDatas(data.data);
       setLoading(false);
     });

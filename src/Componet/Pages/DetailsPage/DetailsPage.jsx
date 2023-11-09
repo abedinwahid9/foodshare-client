@@ -11,7 +11,7 @@ const DetailsPage = () => {
   const { user } = useContext(AuthProvider);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/foods/details/${id.id}`)
+    fetch(`https://food-community-sever.vercel.app/foods/details/${id.id}`)
       .then((res) => res.json())
       .then((data) => {
         setLoading(true);
@@ -69,7 +69,7 @@ const DetailsPage = () => {
     };
 
     axios
-      .post("http://localhost:5000/reqfood", {
+      .post("https://food-community-sever.vercel.app/reqfood", {
         ...requestDetails,
       })
       .then((res) => {

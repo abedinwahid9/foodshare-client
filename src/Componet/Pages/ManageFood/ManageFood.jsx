@@ -7,12 +7,28 @@ const ManageFood = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthProvider);
+  const [singleData, setSingleData] = useState({});
+
+  const { Foodimageurl, foodName, FoodQuantity, ExpiredDate, AdditionalNotes } =
+    singleData;
 
   const email = user.email;
   const id = useParams();
 
   useEffect(() => {
-    axios(`http://localhost:5000/reqfood?email=${email}&sort=${id.id}`)
+    fetch(`https://food-community-sever.vercel.app/foods/details/${id.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(true);
+        setSingleData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios(
+      `https://food-community-sever.vercel.app/reqfood?email=${email}&sort=${id.id}`
+    )
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);
@@ -96,28 +112,23 @@ const ManageFood = () => {
       </div>
       <div className="card bg-transparent">
         <figure className="px-10 pt-10">
-          <img
-            src="https://i.ibb.co/GQMxDTd/1-fe-MTb-NGk-DO37-R9c1k-LHMTA.webp"
-            alt="Shoes"
-            className="rounded-xl"
-          />
+          <img src={Foodimageurl} alt="Shoes" className="rounded-xl" />
         </figure>
         <div className="card-body md:px-20 py-10">
-          <h2 className="font-extrabold text-6xl">food name</h2>
+          <h2 className="font-extrabold text-6xl">{foodName}</h2>
 
           <p className="font-bold text-xl">
-            Food Quantity: <span className="font-normal">5pcs</span>
+            Food Quantity:{" "}
+            <span className="font-normal">{FoodQuantity} pcs</span>
           </p>
           <p className="font-bold text-xl">
-            Expired Date/Time: <span className="font-normal">2days</span>
+            Expired Date/Time:{" "}
+            <span className="font-normal">{ExpiredDate}</span>
           </p>
 
           <p className="font-bold text-xl">
             Additional Notes:{" "}
-            <span className="font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Consectetur, nihil!
-            </span>
+            <span className="font-normal">{AdditionalNotes}</span>
           </p>
         </div>
       </div>

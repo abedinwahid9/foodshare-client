@@ -1,11 +1,54 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateFood = () => {
   const { control, handleSubmit } = useForm();
+  const [fooddata, setFooddata] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`https://food-community-sever.vercel.app/foods/update/${params.id}`)
+      .then((data) => {
+        setIsLoading(true);
+        setFooddata(data.data);
+        setIsLoading(false);
+      });
+  }, [params.id]);
+
+  const {
+    foodName,
+    Foodimageurl,
+    FoodQuantity,
+    Pickuplocation,
+    ExpiredDate,
+    AdditionalNotes,
+  } = fooddata;
+
+  console.log(fooddata);
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    axios
+      .put(
+        `https://food-community-sever.vercel.app/foods/update/${params.id}`,
+        { ...data }
+      )
+      .then((data) => {
+        if (data.data.acknowledged) {
+          Swal.fire("food update success ");
+        }
+      });
   };
+
+  if (isLoading) {
+    return <span className="loading loading-spinner loading-lg"></span>;
+  }
+
   return (
     <div
       className="py-10 bg-no-repeat bg-contain bg-cover"
@@ -42,7 +85,7 @@ const UpdateFood = () => {
                   )}
                   name="foodName"
                   control={control}
-                  defaultValue=""
+                  defaultValue={foodName}
                 />
               </div>
               <div className="form-control">
@@ -63,7 +106,7 @@ const UpdateFood = () => {
                   )}
                   name="Foodimageurl"
                   control={control}
-                  defaultValue=""
+                  defaultValue={Foodimageurl}
                 />
               </div>
               <div className="flex flex-col md:flex-row gap-3">
@@ -85,7 +128,7 @@ const UpdateFood = () => {
                     )}
                     name="FoodQuantity"
                     control={control}
-                    defaultValue=""
+                    defaultValue={FoodQuantity}
                   />
                 </div>
                 <div className="form-control">
@@ -105,7 +148,7 @@ const UpdateFood = () => {
                     )}
                     name="ExpiredDate"
                     control={control}
-                    defaultValue=""
+                    defaultValue={ExpiredDate}
                   />
                 </div>
                 <div className="form-control">
@@ -126,7 +169,7 @@ const UpdateFood = () => {
                     )}
                     name="Pickuplocation"
                     control={control}
-                    defaultValue=""
+                    defaultValue={Pickuplocation}
                   />
                 </div>
               </div>
@@ -149,7 +192,7 @@ const UpdateFood = () => {
                   )}
                   name="AdditionalNotes"
                   control={control}
-                  defaultValue=""
+                  defaultValue={AdditionalNotes}
                 />
               </div>
               <div className="form-control mt-6">

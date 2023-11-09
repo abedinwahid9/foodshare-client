@@ -1,16 +1,20 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
 } from "@tanstack/react-table";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const MyreqFood = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { user } = useContext(AuthProvider);
+
+  console.log(addDatas);
 
   const columns = [
     {
@@ -23,23 +27,23 @@ const MyreqFood = () => {
     },
     {
       header: "Pickup Location",
-      accessorKey: "foodName",
+      accessorKey: "Pickuplocation",
     },
     {
       header: "Expire Date",
-      accessorKey: "donatorName",
+      accessorKey: "ExpiredDate",
     },
     {
       header: "Request Date",
-      accessorKey: "pickupLocation",
+      accessorKey: "reqDate",
     },
     {
       header: "Your Donation Amount",
-      accessorKey: "pickupLocation",
+      accessorKey: "donationAmount",
     },
     {
       header: "Status (available/delivered)",
-      accessorKey: "pickupLocation",
+      accessorKey: "Accessibility",
     },
     {
       header: "Actions",
@@ -63,8 +67,10 @@ const MyreqFood = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const email = user.email;
+
   useEffect(() => {
-    axios("/data.json")
+    axios(`https://food-community-sever.vercel.app/reqfood/${email}`)
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);
@@ -92,7 +98,7 @@ const MyreqFood = () => {
     return <>loading.....</>;
   }
 
-  if (screenWidth < 768) {
+  if (screenWidth < 1020) {
     return <h3>Please use a larger screen or desktop.</h3>;
   }
 

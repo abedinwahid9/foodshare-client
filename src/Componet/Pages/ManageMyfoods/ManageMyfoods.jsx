@@ -66,7 +66,7 @@ const ManageMyfoods = () => {
             <MdManageHistory />
           </Link>
           <Link
-            to="/update/:id"
+            to={`/update/${row.original._id}`}
             className="btn bg-thirdColor text-secondColor text-2xl"
             onClick={() => handleEdit(row.original._id)}
           >
@@ -91,7 +91,7 @@ const ManageMyfoods = () => {
 
   const email = user.email;
   useEffect(() => {
-    axios(`http://localhost:5000/foods/${email}`)
+    axios(`https://food-community-sever.vercel.app/foods/${email}`)
       .then((response) => {
         setLoading(true);
         setaddDatas(response.data);

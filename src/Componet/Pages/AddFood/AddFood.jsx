@@ -16,7 +16,7 @@ const AddFood = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5000/addfood", {
+      .post("https://food-community-sever.vercel.app/addfood", {
         ...data,
         email: user.email,
         ...donarInfo,
