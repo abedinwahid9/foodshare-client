@@ -7,6 +7,7 @@ import {
   getCoreRowModel,
 } from "@tanstack/react-table";
 import { AuthProvider } from "../../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const MyreqFood = () => {
   const [addDatas, setaddDatas] = useState([]);
@@ -14,7 +15,32 @@ const MyreqFood = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { user } = useContext(AuthProvider);
 
-  console.log(addDatas);
+  const handleRemove = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/reqfood/${id}`)
+
+          .then((data) => {
+            if (data.data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const updateData = addDatas.filter((data) => {
+                data.id !== id;
+              });
+              setaddDatas(updateData);
+            }
+          });
+      }
+    });
+  };
 
   const columns = [
     {
@@ -52,7 +78,7 @@ const MyreqFood = () => {
         <div className="space-x-2">
           <button
             className="btn bg-thirdColor text-secondColor "
-            onClick={() => handleRemove(row.original.id)}
+            onClick={() => handleRemove(row.original._id)}
           >
             Cancel Request
           </button>
@@ -87,7 +113,7 @@ const MyreqFood = () => {
     return () => {
       window.removeEventListener("resize", handleScreenWidthChange);
     };
-  }, []);
+  }, [email]);
 
   // Function to handle screen width change
   const handleScreenWidthChange = () => {

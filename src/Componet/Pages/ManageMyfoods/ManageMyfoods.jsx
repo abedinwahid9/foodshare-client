@@ -10,12 +10,41 @@ import { Link } from "react-router-dom";
 import { MdManageHistory, MdEditNote } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { AuthProvider } from "../../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const ManageMyfoods = () => {
   const [addDatas, setaddDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { user } = useContext(AuthProvider);
+
+  const handleRemove = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/foods/${id}`)
+
+          .then((data) => {
+            if (data.data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const updateData = addDatas.filter((data) => {
+                data.id !== id;
+              });
+              setaddDatas(updateData);
+            }
+          });
+      }
+    });
+  };
 
   const columns = [
     {
