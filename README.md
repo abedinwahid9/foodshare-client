@@ -7,4 +7,4 @@
 - only user see his/her data
 - his/her data read update and also delete
 
-Wensite:- https://foodsharecommunity.netlify.apps
+Wensite:- https://foodsharecommunity.netlify.app/
