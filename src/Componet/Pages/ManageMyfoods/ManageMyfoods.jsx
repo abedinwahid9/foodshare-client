@@ -31,7 +31,7 @@ const ManageMyfoods = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/foods/${id}`)
+          .delete(`https://food-community-sever.vercel.app/foods/${id}`)
 
           .then((data) => {
             if (data.data.deletedCount > 0) {

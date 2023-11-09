@@ -27,7 +27,7 @@ const MyreqFood = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/reqfood/${id}`)
+          .delete(`https://food-community-sever.vercel.app/reqfood/${id}`)
 
           .then((data) => {
             if (data.data.deletedCount > 0) {
