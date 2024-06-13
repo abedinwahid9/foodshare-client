@@ -47,5 +47,5 @@ Welcome to the Food Share Community, a platform designed to facilitate sharing a
 
 ### links
 
-website: https://harborhomes.netlify.app](https://foodsharecommunity.netlify.app/) <br/>
+website: https://foodsharecommunity.netlify.app/
 
